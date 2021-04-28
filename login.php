@@ -23,11 +23,28 @@
     </header>
 
     <main class="px-3">
-        <h1>Le Chouette Coin</h1>
-        <p class="lead">Le Chouette Coin est votre site privilégié pour partager vos annonces</p>
-        <p class="lead">
-        <a href="./signin.php" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Se connecter</a>
-        </p>
+    <div class="row">
+        <div class="col">
+            <h3>S'inscrire</h3>
+            <form
+                action="#"
+                method="POST">
+                <div class="form-group">
+                    <label for="InputEmail1">Adresse mail</label>
+                    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp"
+                        name="email_signup" required>
+                </div>
+                <div class="form-group">
+                    <label for="InputPassword1">Entrez votre mot de passe</label>
+                    <input type="password" class="form-control" id="InputPassword1" name="password1_signup" required>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" name="submit_signup" value="inscription">S'inscrire</button>
+                </div>
+            </form>
+        </div>
+    </div>
     </main>
 
     <footer class="mt-auto text-white-50">
