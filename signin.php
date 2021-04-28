@@ -27,7 +27,7 @@
         <div class="col">
             <h3>S'inscrire</h3>
             <form
-                action="<?php $_SERVER['REQUEST_URI']; ?>"
+                action="#"
                 method="POST">
                 <div class="form-group">
                     <label for="InputEmail1">Adresse mail</label>
