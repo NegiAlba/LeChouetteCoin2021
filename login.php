@@ -43,6 +43,11 @@
                     <button type="submit" class="btn btn-primary" name="submit_signup" value="inscription">S'inscrire</button>
                 </div>
             </form>
+            <div class="row">
+                <div class="col">
+                    <p>Vous ne possédez pas de compte ? <a href="./signin.php">Inscrivez-vous ici </a></p>
+                </div>
+            </div>
         </div>
     </div>
     </main>
