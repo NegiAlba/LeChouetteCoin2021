@@ -71,9 +71,9 @@
         <div>
         <h3 class="float-md-start mb-0">Le Chouette Coin</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-            <a class="nav-link" href="#">Produits</a>
-            <a class="nav-link" href="#">Profil</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
+            <a class="nav-link" href="products.php">Produits</a>
+            <a class="nav-link" href="profile.php">Profil</a>
         </nav>
         </div>
     </header>

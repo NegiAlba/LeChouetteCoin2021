@@ -15,19 +15,17 @@
         <div>
         <h3 class="float-md-start mb-0">Le Chouette Coin</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
-            <a class="nav-link" href="products.php">Produits</a>
-            <a class="nav-link" href="profile.php">Profil</a>
+            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+            <a class="nav-link" href="./products.php">Produits</a>
+            <a class="nav-link" href="#">Profil</a>
         </nav>
         </div>
     </header>
 
     <main class="px-3">
-        <h1>Le Chouette Coin</h1>
-        <p class="lead">Le Chouette Coin est votre site privilégié pour partager vos annonces</p>
-        <p class="lead">
-        <a href="./login.php" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Se connecter</a>
-        </p>
+        <div>
+            TOUS LES PRODUITS
+        </div>
     </main>
 
     <footer class="mt-auto text-white-50">
