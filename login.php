@@ -60,6 +60,7 @@ if (!empty($_POST['email_login']) && !empty($_POST['password_login']) && isset($
     <div class="row">
         <div class="col">
             <h3>Se connecter</h3>
+            <!-- //? Système d'alerte qui dépend de 3 variables, $alert pour s'afficher, $type pour le choix de la couleur, $message pour le contenu du message d'alerte -->
             <?php echo $alert ? "<div class='alert alert-{$type} mt-2'>{$message}</div>" : ''; ?>
             <form action="#" method="POST">
                 <div class="form-group">

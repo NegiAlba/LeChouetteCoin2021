@@ -1,3 +1,4 @@
+<!-- //? Ajout de require pour insérer des fragments de page plûtot que de les répéter (ici: le header et le footer) -->
 <?php require 'inc/header.php' ?>
 
 <main class="px-3">
