@@ -18,6 +18,35 @@ $categories = $connect->query($sqlCategory)->fetchAll();
 
 //? Etape 1 : Vérification de la validité du formulaire et de l'appui sur le bouton envoi
 if (isset($_POST['product_submit']) && !empty($_POST['product_name']) && !empty($_POST['product_price']) && !empty($_POST['product_description']) && !empty($_POST['product_category'])) {
+    //? Etape 2 : Initialisation des variables & assainissement (via strip_tags cette fois)
+
+    $name = strip_tags($_POST['product_name']);
+    $description = strip_tags($_POST['product_description']);
+    $price = intval(strip_tags($_POST['product_price']));
+    $category = strip_tags($_POST['product_category']);
+    $user_id = $_SESSION['id'];
+
+    //? Etape 3 : Vérification du prix positif : Vérifier que le prix est un chiffre entier, que ce prix est supérieur à 0
+    if (is_int($price) && $price > 0) {
+        try {
+            $sth = $connect->prepare("INSERT INTO products
+            (products_name,products_description,products_price, author, category)
+            VALUES
+            (:products_name,:products_description,:products_price, :author, :category)");
+            $sth->bindValue(':products_name', $name);
+            $sth->bindValue(':products_description', $description);
+            $sth->bindValue(':products_price', $price);
+            $sth->bindValue(':author', $user_id);
+            $sth->bindValue(':category', $category);
+
+            $sth->execute();
+
+            echo "Votre article a bien été ajouté";
+        } catch (PDOException $error) {
+            echo 'Erreur: ' . $error->getMessage();
+        }
+    }
+    // var_dump($name, $description, $price, $category);
 }
 ?>
 
