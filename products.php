@@ -28,6 +28,7 @@ $products = $connect->query($sqlProducts)->fetchAll(PDO::FETCH_ASSOC);
                     <p><?php echo $product['created_at']; ?></p>
                     <!-- //? Je veux ajouter une page de détails, donc je crée un lien qui utiliseras une requête GET contenant l'id de mon produit pour afficher la page de détails du produit en question. -->
                     <a href="product.php?id=<?php echo $product['products_id']; ?>" class="card-link btn btn-primary">Afficher article</a>
+                    <a href="editproducts.php?id=<?php echo $product['products_id']; ?>" class="card-link btn btn-primary">Modifier article</a>
                 </div>
             </div>
         <?php
