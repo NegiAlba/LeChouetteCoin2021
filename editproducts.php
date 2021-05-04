@@ -90,7 +90,8 @@ if (isset($_POST['product_submit']) && !empty($_POST['product_name']) && !empty(
             <form action="#" method="POST">
                 <div class="form-group">
                     <label for="InputName">Nom de l'article</label>
-                    <input type="text" class="form-control" id="InputName" placeholder="Nom de votre article" name="product_name" value=<?php echo $product['products_name']; ?> required>
+                    <!-- //? Ajoutez des guillemets autour du echo de value, parfois ça n'affiche pas le titre en entier à cause de ça. -->
+                    <input type="text" class="form-control" id="InputName" placeholder="Nom de votre article" name="product_name" value="<?php echo $product['products_name']; ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="InputDescription">Description de l'article</label>
@@ -108,10 +109,6 @@ if (isset($_POST['product_submit']) && !empty($_POST['product_name']) && !empty(
                         //? On va boucler sur l'array categories, de façon à ce que chaque ligne de la boucle corresponde à une variable $category et aussi à une ligne de la BDD.
                         foreach ($categories as $category) {
                         ?>
-                            if($category['categories_id'] === $product['category']){
-                            //* rajouter selected au champ
-                            //* sinon ne rien faire */
-                            }
                             <option <?php echo $category['categories_id'] === $product['category'] ? 'selected' : ''; ?> value="<?php echo $category['categories_id']; ?>">
                                 <?php echo $category['categories_name']; ?>
                             </option>
