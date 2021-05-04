@@ -83,6 +83,7 @@ if (isset($_POST['product_submit']) && !empty($_POST['product_name']) && !empty(
 }
 ?>
 
+//? Pour afficher les valeurs de base ( et c'est ABSOLUMENT NECESSAIRE ) je dois affecter leur value initiale sur chaque champ à l'aide d'un value= et de l'appel à leur valeur avec un echo
 <main class="px-3">
     <div class="row">
         <div class="col-12">
