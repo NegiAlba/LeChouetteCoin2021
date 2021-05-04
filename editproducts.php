@@ -103,12 +103,16 @@ if (isset($_POST['product_submit']) && !empty($_POST['product_name']) && !empty(
                 <div class="form-group">
                     <label for="InputCategory">Catégorie de l'article</label>
                     <select class="form-control" id="InputCategory" name="product_category" required>
-                        <option value="<?php echo $product['category']; ?>"><?php echo $product['categories_name']; ?></option>
+                        <!-- <option value="<?php echo $product['category']; ?>"><?php echo $product['categories_name']; ?></option> -->
                         <?php
                         //? On va boucler sur l'array categories, de façon à ce que chaque ligne de la boucle corresponde à une variable $category et aussi à une ligne de la BDD.
                         foreach ($categories as $category) {
                         ?>
-                            <option value="<?php echo $category['categories_id']; ?>">
+                            if($category['categories_id'] === $product['category']){
+                            //* rajouter selected au champ
+                            //* sinon ne rien faire */
+                            }
+                            <option <?php echo $category['categories_id'] === $product['category'] ? 'selected' : ''; ?> value="<?php echo $category['categories_id']; ?>">
                                 <?php echo $category['categories_name']; ?>
                             </option>
                         <?php
