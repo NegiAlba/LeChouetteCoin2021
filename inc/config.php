@@ -5,7 +5,7 @@ try {
     // Définir le mode d'erreur de PDO sur Exception
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     session_start();
-    if ($_SESSION['token'] = bin2hex(random_bytes(32))) {
+    if (!empty($_SESSION['token'])) {
         $_SESSION['token'] = bin2hex(random_bytes(32));
     }
     $token = $_SESSION['token'];
