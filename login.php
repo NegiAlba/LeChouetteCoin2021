@@ -1,6 +1,13 @@
+<?php $page = 'Login'; ?>
 <?php require 'inc/header.php' ?>
 <?php
 $alert = false;
+
+if (isset($_GET['p'])) {
+    $alert = true;
+    $type = 'warning';
+    $message = "Vous devez vous connecter pour réaliser cette opération";
+}
 
 //? Etape 1 : Vérification du remplissage du formulaire
 if (!empty($_POST['email_login']) && !empty($_POST['password_login']) && isset($_POST['submit_login'])) {

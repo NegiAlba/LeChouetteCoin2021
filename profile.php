@@ -1,8 +1,9 @@
+<?php $page = 'Profile'; ?>
 <?php require 'inc/header.php' ?>
 <?php
 //! Récupérer toutes les infos relatives à l'utilisateur connecté depuis la base de données. En ce moment dans le token de session on possède l'id de l'utilisateur, son username et son email. Il faut éventuellement récupérer tout le reste depuis la base de données.
 
-if (!empty($_SESSION)) {
+if (!empty($_SESSION['id'])) {
     //? 1. On insère l'id de session dans une variable qui va servir pour une requête SQL si il y a un utilisateur connecté
     $user_id = $_SESSION['id'];
 

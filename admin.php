@@ -1,7 +1,7 @@
 <?php require 'inc/header.php'; ?>
 <?php
 //! On va vérifier que l'utilisateur est connecté dans un premier temps.
-if (!empty($_SESSION)) {
+if (!empty($_SESSION['id'])) {
     //! Récupérer toutes les infos relatives à l'utilisateur connecté depuis la base de données. Il faut que cet utilisateur soit impérativement un administrateur pour accéder à la page.
     //? 1. On insère l'id de session dans une variable qui va servir pour une requête SQL si il y a un utilisateur connecté
     $admin_id = $_SESSION['id'];

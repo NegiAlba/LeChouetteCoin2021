@@ -23,7 +23,7 @@
                     <!-- //? Affichage conditionnel du bouton se connecter/ page de profil -->
                     <?php
                     //? Vérification des variables des sessions : si elle n'existent pas, alors afficher un bouton se connecter
-                    if (empty($_SESSION)) {
+                    if (empty($_SESSION['id'])) {
                     ?>
                         <a class="nav-link" href="login.php">Se connecter</a>
                     <?php

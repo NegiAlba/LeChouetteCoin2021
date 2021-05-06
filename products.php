@@ -1,3 +1,5 @@
+<?php $page = 'Products page'; ?>
+
 <?php require 'inc/header.php' ?>
 <?php
 //! Affichage de tous les produits. Il faudra une requête SQL qui récupère tous les produits, et qui les affiche dans des cartes séparées.
