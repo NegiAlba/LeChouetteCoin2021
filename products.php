@@ -18,6 +18,14 @@ $products = $connect->query($sqlProducts)->fetchAll(PDO::FETCH_ASSOC);
         ?>
             <div class="card mx-2 text-white bg-info" style="width: 18rem;">
                 <div class="card-body">
+                    <?php if (is_null($product['image']) || empty($product['image'])) {
+                        echo "<img src='./public/uploads/noImg.png' alt='product_image' width='200'/> ";
+                    } else {
+                    ?>
+                        <img src="./public/uploads/<?php echo $product['image']; ?>" alt='<?php echo $product['product_name']; ?>' width='200' />
+                    <?php
+                    }
+                    ?>
                     <h5 class="card-title"><?php echo $product['products_name']; ?>
                     </h5>
                     <p class="card-text"><?php echo $product['products_description']; ?>
