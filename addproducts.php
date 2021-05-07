@@ -35,11 +35,12 @@ if (isset($_POST['product_submit']) && !empty($_POST['product_name']) && !empty(
     $user_id = $_SESSION['id'];
 
     //! Variable pour l'image : vérification de si une image a été ajoutée
-    if (isset($_FILES['product_image'])) {
-        $image = $_FILES['product_image'];
+    $image = $_FILES['product_image'];
+
+    if ($image['size'] > 0) {
 
         //* Vérification de la taille du fichier
-        if ($image['size'] > 0 && $image['size'] <= 1000000) {
+        if ($image['size'] <= 1000000) {
             //* Vérification du format du fichier
             $valid_ext = ['jpg', 'jpeg', 'png'];
             $check_ext = strtolower(substr(strrchr($image['name'], '.'), 1));
@@ -116,7 +117,7 @@ if (isset($_POST['product_submit']) && !empty($_POST['product_name']) && !empty(
     }
 
     // echo '<pre>';
-    var_dump($image);
+    // var_dump($image);
     // echo '</pre>';
 
 
