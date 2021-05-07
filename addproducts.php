@@ -34,63 +34,92 @@ if (isset($_POST['product_submit']) && !empty($_POST['product_name']) && !empty(
     $category = strip_tags($_POST['product_category']);
     $user_id = $_SESSION['id'];
 
-    //! Variable pour l'image
-    $image = $_FILES['product_image'];
+    //! Variable pour l'image : vérification de si une image a été ajoutée
+    if (isset($_FILES['product_image'])) {
+        $image = $_FILES['product_image'];
 
-    //* Vérification de la taille du fichier
-    if ($image['size'] > 0 && $image['size'] <= 1000000) {
-        //* Vérification du format du fichier
-        $valid_ext = ['jpg', 'jpeg', 'png'];
-        $check_ext = strtolower(substr(strrchr($image['name'], '.'), 1));
-        if (in_array($check_ext, $valid_ext)) {
-            //* Vérifier la validité du fichier (via MIME type) -- Pas fait ici --
-            //* Envoi du fichier au serveur
+        //* Vérification de la taille du fichier
+        if ($image['size'] > 0 && $image['size'] <= 1000000) {
+            //* Vérification du format du fichier
+            $valid_ext = ['jpg', 'jpeg', 'png'];
+            $check_ext = strtolower(substr(strrchr($image['name'], '.'), 1));
+            if (in_array($check_ext, $valid_ext)) {
+                //* Vérifier la validité du fichier (via MIME type) -- Pas fait ici --
+                //* Envoi du fichier au serveur
 
-            $image_name = uniqid() . '_' . $image['name'];
-            $upload_dir = "./public/uploads/";
-            $upload_name = $upload_dir . $image_name;
-            $upload_result = move_uploaded_file($image['tmp_name'], $upload_name);
-            if ($upload_result) {
-                //* Insertion des données dans la BDD suivant le schéma d'avant
-                if (is_int($price) && $price > 0) {
-                    //? Etape 4 : Enregistrement des données du formulaire via une requete préparée sql INSERT
-                    try {
-                        //? Préparation de la requête, je définis la requête à exécuter avec des valeurs génériques (des paramètres nommés).
-                        $sth = $connect->prepare("INSERT INTO products
-                        (products_name,products_description,products_price, author, category, image)
-                        VALUES
-                        (:products_name,:products_description,:products_price, :author, :category, :image)");
-                        //? J'affecte chacun des paramètres nommés à leur valeur via un bindValue. Cette opération me protège des injections SQL (en + de l'assainissement des variables)
-                        $sth->bindValue(':products_name', $name);
-                        $sth->bindValue(':products_description', $description);
-                        $sth->bindValue(':products_price', $price);
-                        $sth->bindValue(':author', $user_id);
-                        $sth->bindValue(':category', $category);
-                        $sth->bindValue(':image', $image_name);
+                $image_name = uniqid() . '_' . $image['name'];
+                $upload_dir = "./public/uploads/";
+                $upload_name = $upload_dir . $image_name;
+                $upload_result = move_uploaded_file($image['tmp_name'], $upload_name);
+                if ($upload_result) {
+                    //* Insertion des données dans la BDD suivant le schéma d'avant
+                    //? Etape 3 : Vérification du prix positif : Vérifier que le prix est un chiffre entier, que ce prix est supérieur à 0
+                    if (is_int($price) && $price > 0) {
+                        //? Etape 4 : Enregistrement des données du formulaire via une requete préparée sql INSERT
+                        try {
+                            //? Préparation de la requête, je définis la requête à exécuter avec des valeurs génériques (des paramètres nommés).
+                            $sth = $connect->prepare("INSERT INTO products
+                            (products_name,products_description,products_price, author, category, image)
+                            VALUES
+                            (:products_name,:products_description,:products_price, :author, :category, :image)");
+                            //? J'affecte chacun des paramètres nommés à leur valeur via un bindValue. Cette opération me protège des injections SQL (en + de l'assainissement des variables)
+                            $sth->bindValue(':products_name', $name);
+                            $sth->bindValue(':products_description', $description);
+                            $sth->bindValue(':products_price', $price);
+                            $sth->bindValue(':author', $user_id);
+                            $sth->bindValue(':category', $category);
+                            $sth->bindValue(':image', $image_name);
 
-                        //? J'exécute ma requête SQL d'insertion avec execute()
-                        $sth->execute();
+                            //? J'exécute ma requête SQL d'insertion avec execute()
+                            $sth->execute();
 
-                        echo "Votre article a bien été ajouté";
+                            echo "Votre article a bien été ajouté";
 
-                        //? Je redirige vers la page des produits.
-                        // header('Location: products.php');
-                    } catch (PDOException $error) {
-                        echo 'Erreur: ' . $error->getMessage();
+                            //? Je redirige vers la page des produits.
+                            // header('Location: products.php');
+                        } catch (PDOException $error) {
+                            echo 'Erreur: ' . $error->getMessage();
+                        }
                     }
                 }
             }
         }
+    } else {
+        //! Si aucune image n'a été upload, on refait la requête sans l'image
+        //? Etape 3 : Vérification du prix positif : Vérifier que le prix est un chiffre entier, que ce prix est supérieur à 0
+        if (is_int($price) && $price > 0) {
+            //? Etape 4 : Enregistrement des données du formulaire via une requete préparée sql INSERT
+            try {
+                //? Préparation de la requête, je définis la requête à exécuter avec des valeurs génériques (des paramètres nommés).
+                $sth = $connect->prepare("INSERT INTO products
+                (products_name,products_description,products_price, author, category)
+                VALUES
+                (:products_name,:products_description,:products_price, :author, :category)");
+                //? J'affecte chacun des paramètres nommés à leur valeur via un bindValue. Cette opération me protège des injections SQL (en + de l'assainissement des variables)
+                $sth->bindValue(':products_name', $name);
+                $sth->bindValue(':products_description', $description);
+                $sth->bindValue(':products_price', $price);
+                $sth->bindValue(':author', $user_id);
+                $sth->bindValue(':category', $category);
+
+                //? J'exécute ma requête SQL d'insertion avec execute()
+                $sth->execute();
+
+                echo "Votre article a bien été ajouté";
+
+                //? Je redirige vers la page des produits.
+                // header('Location: products.php');
+            } catch (PDOException $error) {
+                echo 'Erreur: ' . $error->getMessage();
+            }
+        }
     }
-
-
-
 
     // echo '<pre>';
     var_dump($image);
     // echo '</pre>';
 
-    //? Etape 3 : Vérification du prix positif : Vérifier que le prix est un chiffre entier, que ce prix est supérieur à 0
+
     // var_dump($name, $description, $price, $category);
 }
 ?>
